@@ -7,116 +7,49 @@ void main() {
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  int counter = 0;
+
+  void onClicked() => setState(() {
+        counter = counter + 1;
+      });
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: const Color(0xFF181818),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 60,
+        backgroundColor: const Color(0xFFF4EDDB),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Click Count',
+                style: TextStyle(
+                  fontSize: 30,
                 ),
-                const Header(),
-                const SizedBox(
-                  height: 60,
+              ),
+              Text(
+                '$counter',
+                style: const TextStyle(
+                  fontSize: 30,
                 ),
-                Text(
-                  'Total Balance',
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Colors.white.withOpacity(0.8),
-                  ),
+              ),
+              IconButton(
+                iconSize: 40,
+                onPressed: onClicked,
+                icon: const Icon(
+                  Icons.add_box_rounded,
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  '\$5 194 482',
-                  style: TextStyle(
-                    fontSize: 42,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Button(
-                      text: 'Transfer',
-                      bgColor: Colors.amber,
-                      textColor: Colors.black,
-                    ),
-                    Button(
-                        text: 'Request',
-                        bgColor: Color(0xFF1F2123),
-                        textColor: Colors.white)
-                  ],
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    const Text(
-                      'Wallets',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Text(
-                      'View All',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white.withOpacity(0.8),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const CurrencyCard(
-                  name: 'Euro',
-                  code: 'EUR',
-                  amount: '6 428',
-                  icon: Icons.euro_rounded,
-                  isInvarted: false,
-                  positionOder: 0,
-                ),
-                const CurrencyCard(
-                  name: 'Bitcoin',
-                  code: 'BTC',
-                  amount: '9 758',
-                  icon: Icons.currency_bitcoin_rounded,
-                  isInvarted: true,
-                  positionOder: 1,
-                ),
-                const CurrencyCard(
-                  name: 'Dollar',
-                  code: 'USD',
-                  amount: '428',
-                  icon: Icons.attach_money_rounded,
-                  isInvarted: false,
-                  positionOder: 2,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
